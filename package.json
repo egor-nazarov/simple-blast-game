@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/elkinegora/simple-blast-game/issues"
   },
-  "homepage": "https://github.com/elkinegora/simple-blast-game#readme"
+  "homepage": "https://github.com/elkinegora/simple-blast-game#readme",
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.0.5",
+    "babel-preset-es2015": "^6.24.1",
+    "webpack": "^4.28.4"
+  }
 }
