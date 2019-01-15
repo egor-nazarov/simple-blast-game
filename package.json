@@ -1,0 +1,19 @@
+{
+  "name": "simple-blast-game",
+  "version": "1.0.0",
+  "description": "repo for simple logic game with blast genre",
+  "main": "./src/scripts/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elkinegora/simple-blast-game.git"
+  },
+  "author": "Egor Elkin",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/elkinegora/simple-blast-game/issues"
+  },
+  "homepage": "https://github.com/elkinegora/simple-blast-game#readme"
+}
