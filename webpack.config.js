@@ -25,16 +25,20 @@ module.exports = {
         ]
     },
     plugins: [
-        new webpack.DefinePlugin({
-            'CANVAS_RENDERER': JSON.stringify(true),
-            'WEBGL_RENDERER': JSON.stringify(true)
-        }),
         new CopyWebpackPlugin([
             {
                 from: path.resolve(__dirname, 'src/index.html'),
                 to: path.resolve(__dirname, 'dist')
-            }
-        ])
+            },
+            {
+                from: path.resolve(__dirname, 'src/assets'),
+                to: path.resolve(__dirname, 'dist/assets')
+            },
+        ]),
+        new webpack.DefinePlugin({
+            'CANVAS_RENDERER': JSON.stringify(true),
+            'WEBGL_RENDERER': JSON.stringify(true)
+        })
     ],
     devServer: {
         contentBase: path.resolve(__dirname, 'dist'),
