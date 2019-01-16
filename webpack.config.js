@@ -1,4 +1,5 @@
-const   path        = require('path');
+const   path        = require('path'),
+        webpack     = require('webpack');
 
 module.exports = {
     context: path.resolve(__dirname, 'src'),
@@ -15,8 +16,21 @@ module.exports = {
                 use: {
                     loader: "babel-loader"
                 }
+            },
+            {
+                test: [ /\.vert$/, /\.frag$/ ],
+                use: 'raw-loader'
             }
         ]
+    },
+    plugins: [
+        new webpack.DefinePlugin({
+            'CANVAS_RENDERER': JSON.stringify(true),
+            'WEBGL_RENDERER': JSON.stringify(true)
+        })
+    ],
+    devServer: {
+        contentBase: path.resolve(__dirname, 'dist'),
     },
     stats: {
         colors: true
