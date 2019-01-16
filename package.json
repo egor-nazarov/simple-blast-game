@@ -4,9 +4,9 @@
   "description": "repo for simple logic game with blast genre",
   "main": "./src/scripts/main.js",
   "scripts": {
-    "build": "webpack --mode=development",
+    "build": "del-cli dist && webpack --mode=development",
     "prod": "del-cli dist && webpack --mode=production",
-    "server": "webpack-dev-server",
+    "server": "del-cli dist && webpack --mode=development && webpack-dev-server --mode=development",
     "clear": "del-cli dist"
   },
   "repository": {
@@ -26,6 +26,7 @@
     "babel-core": "^6.26.3",
     "babel-loader": "^8.0.5",
     "babel-preset-es2015": "^6.24.1",
+    "copy-webpack-plugin": "^4.6.0",
     "raw-loader": "^0.5.1",
     "webpack": "^4.28.4",
     "webpack-cli": "^3.2.1",

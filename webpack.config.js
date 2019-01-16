@@ -1,5 +1,6 @@
-const   path        = require('path'),
-        webpack     = require('webpack');
+const   path                = require('path'),
+        webpack             = require('webpack'),
+        CopyWebpackPlugin   = require('copy-webpack-plugin');
 
 module.exports = {
     context: path.resolve(__dirname, 'src'),
@@ -27,7 +28,13 @@ module.exports = {
         new webpack.DefinePlugin({
             'CANVAS_RENDERER': JSON.stringify(true),
             'WEBGL_RENDERER': JSON.stringify(true)
-        })
+        }),
+        new CopyWebpackPlugin([
+            {
+                from: path.resolve(__dirname, 'src/index.html'),
+                to: path.resolve(__dirname, 'dist')
+            }
+        ])
     ],
     devServer: {
         contentBase: path.resolve(__dirname, 'dist'),
