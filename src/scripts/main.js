@@ -1,5 +1,5 @@
 import 'phaser';
-import { phaserCheck } from './components/phaser-check';
+import { gameHandler } from './components/game-handler';
 
 let game;
 
@@ -7,7 +7,7 @@ window.onload = function() {
     let gameConfig = {
         width: 1280,
         height: 905,
-        scene: phaserCheck,
+        scene: gameHandler,
         backgroundColor: 0xa1a1a1
     };
     game = new Phaser.Game(gameConfig);
