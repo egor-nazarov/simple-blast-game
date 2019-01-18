@@ -9,18 +9,102 @@ export class GameScene extends Phaser.Scene {
         const height = this.cameras.main.height;
 
         // Отрисовка макетов
-        this.add.image(width / 2 - 25, 63, "progressBar");
-        this.add.image(width - 75, 68, "menuButton");
-        this.add.image(width / 4 + 25, height / 2 + 40, "gameField");
-        this.add.image(width / 5 * 4 - 30, height / 2 - 80, "scorePanel");
-        this.add.image(width / 5 * 4 - 35, height / 5 * 4 + 27, "bonusBar");
+        this.items = this.add.group([
+            {
+                key: "progressBar",
+                setXY: {
+                    x: width / 2 - 25,
+                    y: 63
+                }
+            },
+            {
+                key: "menuButton",
+                setXY: {
+                    x: width - 75,
+                    y: 68
+                }
+            },
+            {
+                key: "gameField",
+                setXY: {
+                    x: width / 4 + 25,
+                    y: height / 2 + 40
+                }
+            },
+            {
+                key: "scorePanel",
+                setXY: {
+                    x: width / 5 * 4 - 30,
+                    y: height / 2 - 80
+                }
+            },
+            {
+                key: "bonusBar",
+                setXY: {
+                    x: width / 5 * 4 - 35,
+                    y: height / 5 * 4 + 27
+                }
+            }
+        ]);
 
         // Кубики
-        this.add.image(100, 250, "blueCube");
-        this.add.image(200, 250, "greenCube");
-        this.add.image(300, 250, "purpleCube");
-        this.add.image(400, 250, "redCube");
-        this.add.image(500, 250, "yellowCube");
+        this.items = this.add.group([
+            {
+                key: "blueCube",
+                setXY: {
+                    x: 100,
+                    y: 250
+                },
+                setScale: {
+                    x: 0.5,
+                    y: 0.5
+                }
+            },
+            {
+                key: "greenCube",
+                setXY: {
+                    x: 200,
+                    y: 250
+                },
+                setScale: {
+                    x: 0.5,
+                    y: 0.5
+                }
+            },
+            {
+                key: "purpleCube",
+                setXY: {
+                    x: 300,
+                    y: 250
+                },
+                setScale: {
+                    x: 0.5,
+                    y: 0.5
+                }
+            },
+            {
+                key: "redCube",
+                setXY: {
+                    x: 400,
+                    y: 250
+                },
+                setScale: {
+                    x: 0.5,
+                    y: 0.5
+                }
+            },
+            {
+                key: "yellowCube",
+                setXY: {
+                    x: 500,
+                    y: 250
+                },
+                setScale: {
+                    x: 0.5,
+                    y: 0.5
+                }
+            }
+        ]);
     }
 
     create() {
