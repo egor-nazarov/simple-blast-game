@@ -1,4 +1,4 @@
-export class gameHandler extends Phaser.Scene {
+export class GameHandler extends Phaser.Scene {
     preload() {
         this.load.image('blueCube', 'assets/cubes/blue-cube.png');
         this.load.image('greenCube', 'assets/cubes/green-cube.png');

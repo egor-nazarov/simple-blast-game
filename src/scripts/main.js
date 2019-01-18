@@ -1,16 +1,17 @@
 import 'phaser';
-import { gameHandler } from './components/game-handler';
+import config from "./config/config"
+import { GameHandler } from './components/game-handler';
 
-let game;
+class Game extends Phaser.Game {
+    constructor() {
+        super(config);
+        this.scene.add("Game", GameHandler);
+        this.scene.start("Game");
+    }
+}
 
 window.onload = function() {
-    let gameConfig = {
-        width: 1280,
-        height: 905,
-        scene: gameHandler,
-        backgroundColor: 0xa1a1a1
-    };
-    game = new Phaser.Game(gameConfig);
+    window.game = new Game();
     resize();
     window.addEventListener("resize", resize);
 };
@@ -20,7 +21,7 @@ function resize() {
     const windowWidth = window.innerWidth;
     const windowHeight = window.innerHeight;
     const windowRatio = windowWidth / windowHeight;
-    const gameRatio = game.config.width / game.config.height;
+    const gameRatio = window.game.config.width / window.game.config.height;
     if(windowRatio < gameRatio){
         canvas.style.width = windowWidth + "px";
         canvas.style.height = (windowWidth / gameRatio) + "px";
