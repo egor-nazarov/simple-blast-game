@@ -1,12 +1,14 @@
-import 'phaser';
-import config from "./config/config"
-import { GameHandler } from './components/game-handler';
+import "phaser";
+import config from "./config/config";
+import { PreloaderScene } from "./components/game-preload";
+import { GameScene } from "./components/game-handler";
 
 class Game extends Phaser.Game {
     constructor() {
         super(config);
-        this.scene.add("Game", GameHandler);
-        this.scene.start("Game");
+        this.scene.add("Preloader", PreloaderScene);
+        this.scene.add("Game", GameScene);
+        this.scene.start("Preloader");
     }
 }
 
@@ -22,7 +24,7 @@ function resize() {
     const windowHeight = window.innerHeight;
     const windowRatio = windowWidth / windowHeight;
     const gameRatio = window.game.config.width / window.game.config.height;
-    if(windowRatio < gameRatio){
+    if(windowRatio < gameRatio) {
         canvas.style.width = windowWidth + "px";
         canvas.style.height = (windowWidth / gameRatio) + "px";
     } else {
