@@ -110,5 +110,11 @@ export class GameScene extends Phaser.Scene {
     }
 
     create() {
+        this.newGame = new GameAlgorithm({
+            rows: 10,
+            columns: 10,
+            items: 5
+        });
+        this.newGame.createBoard();
     }
 }
