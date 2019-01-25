@@ -68,16 +68,36 @@ export class GameScene extends Phaser.Scene {
         });
         this.newGame.createBoard();
         this.createPlayField();
+        this.canBreak = true;
+        this.input.on("pointerdown", this.cubeSelection, this);
     }
 
     createPlayField() {
         this.poolArray = [];
-        for (let i = 0; i < this.newGame.getRows(); i ++) {
-            for (let j = 0; j < this.newGame.getColumns(); j ++) {
+        for (let i = 0; i < this.newGame.getRows(); i++) {
+            for (let j = 0; j < this.newGame.getColumns(); j++) {
                 let cubeX = gameSettings.boardOffset.x + gameSettings.cubeProportions_x * j + gameSettings.cubeProportions_x / 2;
                 let cubeY = gameSettings.boardOffset.y + gameSettings.cubeProportions_y * i + gameSettings.cubeProportions_y / 2;
                 let cube = this.add.sprite(cubeX, cubeY, "cubes-sprite", this.newGame.getValue(i, j));
                 this.newGame.setCustomData(i, j, cube);
+            }
+        }
+    }
+
+    cubeSelection(pointer) {
+        if (this.canBreak) {
+            let row = Math.floor((pointer.y - gameSettings.boardOffset.y) / gameSettings.cubeProportions_y);
+            let col = Math.floor((pointer.x - gameSettings.boardOffset.x) / gameSettings.cubeProportions_x);
+            if (this.newGame.validPick(row, col)) {
+                if (this.newGame.countConnectedItems(row, col) > 2) {
+                    this.canBreak = false;
+                    let removeCube = this.newGame.listConnectedItems(row, col);
+                    let destroyed = 0;
+                    removeCube.forEach(function(cube) {
+                        destroyed++;
+                        this.poolArray.push(this.newGame.getCustomData(cube.row, cube.column));
+                    }.bind(this))
+                }
             }
         }
     }

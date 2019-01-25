@@ -5,5 +5,4 @@ export default {
         x: 65,
         y: 183
     },
-    fallSpeed: 0
 };

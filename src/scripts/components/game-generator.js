@@ -49,6 +49,24 @@ class GameAlgorithm {
     setCustomData(row, column, customData) {
         this.newGameArray[row][column].customData = customData;
     }
+
+    // Вернуть произвольное значение кубика
+    getCustomData(row, column) {
+        return this.newGameArray[row][column].customData;
+    }
+
+    // Вернуть объект с кубиками, которые соприкасаются
+    listConnectedItems(row, column) {
+        if (!this.validPick(row, column) || this.newGameArray[row][column].isEmpty) {
+            return;
+        }
+        this.colorToLookFor = this.newGameArray[row][column].value;
+    }
+
+    // Вернуть число соединенных кубиков
+    countConnectedItems(row, column) {
+        return this.listConnectedItems(row, column).length;
+    }
 }
 
 export default GameAlgorithm;
