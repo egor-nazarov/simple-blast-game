@@ -96,6 +96,12 @@ export class GameScene extends Phaser.Scene {
                     removeCube.forEach(function(cube) {
                         destroyed++;
                         this.poolArray.push(this.newGame.getCustomData(cube.row, cube.column));
+                        this.tweens.add({
+                            targets: this.newGame.getCustomData(cube.row, cube.column),
+                            alpha: 0,
+                            duration: gameSettings.breakSpeed,
+                            callbackScope: this,
+                        });
                     }.bind(this))
                 }
             }

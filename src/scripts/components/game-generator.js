@@ -61,11 +61,43 @@ class GameAlgorithm {
             return;
         }
         this.colorToLookFor = this.newGameArray[row][column].value;
+        this.floodFillArray = [];
+        this.floodFillArray.length = 0;
+        this.floodFill(row, column);
+        return this.floodFillArray;
     }
 
     // Вернуть число соединенных кубиков
     countConnectedItems(row, column) {
         return this.listConnectedItems(row, column).length;
+    }
+
+    // Поиск совпадающих участков
+    floodFill(row, column) {
+        if (!this.validPick(row, column) || this.newGameArray[row][column].isEmpty) {
+            return;
+        }
+        if (this.newGameArray[row][column].value === this.colorToLookFor && !this.alreadyVisited(row, column)) {
+            this.floodFillArray.push({
+                row: row,
+                column: column
+            });
+            this.floodFill(row + 1, column);
+            this.floodFill(row - 1, column);
+            this.floodFill(row, column + 1);
+            this.floodFill(row, column - 1);
+        }
+    }
+
+    // Проверить на нажатие конкретного кубика
+    alreadyVisited(row, column) {
+        let found = false;
+        this.floodFillArray.forEach(function(item) {
+            if (item.row === row && item.column === column) {
+                found = true;
+            }
+        });
+        return found;
     }
 }
 

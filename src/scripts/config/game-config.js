@@ -5,4 +5,5 @@ export default {
         x: 65,
         y: 183
     },
+    breakSpeed: 200,
 };
