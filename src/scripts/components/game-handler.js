@@ -1,4 +1,5 @@
 import GameAlgorithm from "./game-generator";
+import "../config/game-config";
 
 export class GameScene extends Phaser.Scene {
     constructor() {
