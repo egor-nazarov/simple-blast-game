@@ -8,7 +8,7 @@ class GameAlgorithm {
     // Создание игровой доски
     createBoard() {
         this.newGameArray = [];
-        for (let i = 0; i < this.rows; i ++) {
+        for (let i = 0; i < this.rows; i++) {
             this.newGameArray[i] = [];
             for (let j = 0; j < this.columns; j++) {
                 let randomValue = Math.floor(Math.random() * this.items);
@@ -20,6 +20,34 @@ class GameAlgorithm {
                 }
             }
         }
+    }
+
+    // Вернуть строки доски
+    getRows() {
+        return this.rows;
+    }
+
+    // Вернуть колонки доски
+    getColumns() {
+        return this.columns;
+    }
+
+    // Вернуть значение кубика если совпало, иначе это не верный кубик
+    getValue(row, column) {
+        if (!this.validPick(row, column)) {
+            return false;
+        }
+        return this.newGameArray[row][column].value;
+    }
+
+    // Проверка на совпадение значения кубиков
+    validPick(row, column) {
+        return row >= 0 && row < this.rows && column >= 0 && column < this.columns && this.newGameArray[row] !== undefined && this.newGameArray[row][column] !== undefined;
+    }
+
+    // Задать произвольное значение выбранному элементу
+    setCustomData(row, column, customData) {
+        this.newGameArray[row][column].customData = customData;
     }
 }
 

@@ -126,5 +126,18 @@ export class GameScene extends Phaser.Scene {
             items: 5
         });
         this.newGame.createBoard();
+        this.createPlayField();
+    }
+
+    createPlayField() {
+        this.poolArray = [];
+        for (let i = 0; i < this.newGame.getRows(); i ++) {
+            for (let j = 0; j < this.newGame.getColumns(); j ++) {
+                let cubeX = gameSettings.boardOffset.x + gameSettings.cubeProportions_x * j + gameSettings.cubeProportions_x / 2;
+                let cubeY = gameSettings.boardOffset.y + gameSettings.cubeProportions_y * i + gameSettings.cubeProportions_y / 2;
+                let cube = this.add.sprite(cubeX, cubeY, "cubes-sprite", this.newGame.getValue(i, j));
+                this.newGame.setCustomData(i, j, cube);
+            }
+        }
     }
 }
