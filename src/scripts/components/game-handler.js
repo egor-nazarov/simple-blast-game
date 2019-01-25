@@ -1,5 +1,5 @@
 import GameAlgorithm from "./game-generator";
-import "../config/game-config";
+import gameSettings from "../config/game-config";
 
 export class GameScene extends Phaser.Scene {
     constructor() {
@@ -31,7 +31,11 @@ export class GameScene extends Phaser.Scene {
                 key: "gameField",
                 setXY: {
                     x: width / 4 + 25,
-                    y: height / 2 + 40
+                    y: height / 2 + 50
+                },
+                setScale: {
+                    x: 1.02,
+                    y: 1.03
                 }
             },
             {
@@ -108,12 +112,17 @@ export class GameScene extends Phaser.Scene {
                 }
             }
         ]);
+
+        this.load.spritesheet("cubes-sprite", "assets/cubes/cubes-sprite.png", {
+            frameWidth: 62.2,
+            frameHeight: 71
+        });
     }
 
     create() {
         this.newGame = new GameAlgorithm({
-            rows: 10,
-            columns: 10,
+            rows: 9,
+            columns: 9,
             items: 5
         });
         this.newGame.createBoard();

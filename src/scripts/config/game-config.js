@@ -1,5 +1,6 @@
 export default {
-    cubeProportions: 0,
+    cubeProportions_x: 0,
+    cubeProportions_y: 0,
     boardOffset: {
         x: 0,
         y: 0
