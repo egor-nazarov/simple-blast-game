@@ -54,65 +54,6 @@ export class GameScene extends Phaser.Scene {
             }
         ]);
 
-        // Кубики
-        this.items = this.add.group([
-            {
-                key: "blueCube",
-                setXY: {
-                    x: 100,
-                    y: 250
-                },
-                setScale: {
-                    x: 0.5,
-                    y: 0.5
-                }
-            },
-            {
-                key: "greenCube",
-                setXY: {
-                    x: 200,
-                    y: 250
-                },
-                setScale: {
-                    x: 0.5,
-                    y: 0.5
-                }
-            },
-            {
-                key: "purpleCube",
-                setXY: {
-                    x: 300,
-                    y: 250
-                },
-                setScale: {
-                    x: 0.5,
-                    y: 0.5
-                }
-            },
-            {
-                key: "redCube",
-                setXY: {
-                    x: 400,
-                    y: 250
-                },
-                setScale: {
-                    x: 0.5,
-                    y: 0.5
-                }
-            },
-            {
-                key: "yellowCube",
-                setXY: {
-                    x: 500,
-                    y: 250
-                },
-                setScale: {
-                    x: 0.5,
-                    y: 0.5
-                }
-            }
-        ]);
-
         this.load.spritesheet("cubes-sprite", "assets/cubes/cubes-sprite.png", {
             frameWidth: 62.2,
             frameHeight: 71

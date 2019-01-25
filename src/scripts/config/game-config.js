@@ -1,9 +1,9 @@
 export default {
-    cubeProportions_x: 0,
-    cubeProportions_y: 0,
+    cubeProportions_x: 62.2,
+    cubeProportions_y: 71,
     boardOffset: {
-        x: 0,
-        y: 0
+        x: 65,
+        y: 183
     },
     fallSpeed: 0
 };
