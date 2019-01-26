@@ -99,6 +99,58 @@ class GameAlgorithm {
         });
         return found;
     }
+
+    // Проверка на заполненность кубика
+    isEmpty(row, column) {
+        return this.newGameArray[row][column].isEmpty;
+    }
+
+    // Удалить все соединенные кубики
+    removeConnectedItems(row, column) {
+        let items = this.listConnectedItems(row, column);
+        items.forEach(function(item) {
+            this.newGameArray[item.row][item.column].isEmpty = true;
+        }.bind(this))
+    }
+
+    // Падение кубиков
+    arrangeBoard() {
+        let result = [];
+        for (let i = this.getRows() - 2; i >= 0; i--) {
+            for (let j = 0; j < this.getColumns(); j++) {
+                let emptySpaces = this.emptySpacesBelow(i, j);
+                if (!this.isEmpty(i, j) && emptySpaces > 0) {
+                    this.swapItems(i, j, i + emptySpaces, j);
+                    result.push({
+                        row: i + emptySpaces,
+                        column: j,
+                        deltaRow: emptySpaces
+                    });
+                }
+            }
+        }
+        return result;
+    }
+
+    // Вернуть пустые места на доске
+    emptySpacesBelow(row, column) {
+        let result = 0;
+        if (row !== this.getRows()) {
+            for (let i = row + 1; i < this.getRows(); i++) {
+                if (this.isEmpty(i, column)) {
+                    result++;
+                }
+            }
+        }
+        return result;
+    }
+
+    // Поменять кубики местами на пустых строках
+    swapItems(row, column, row2, column2) {
+        let tempObject = Object.assign(this.newGameArray[row][column]);
+        this.newGameArray[row][column] = Object.assign(this.newGameArray[row2][column2]);
+        this.newGameArray[row2][column2] = Object.assign(tempObject);
+    }
 }
 
 export default GameAlgorithm;

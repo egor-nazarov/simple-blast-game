@@ -6,4 +6,5 @@ export default {
         y: 183
     },
     breakSpeed: 200,
+    fallSpeed: 100
 };

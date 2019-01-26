@@ -101,10 +101,37 @@ export class GameScene extends Phaser.Scene {
                             alpha: 0,
                             duration: gameSettings.breakSpeed,
                             callbackScope: this,
+                            onComplete: function() {
+                                destroyed--;
+                                if (destroyed === 0) {
+                                    this.newGame.removeConnectedItems(row, col);
+                                    this.cubeFalling();
+                                }
+                            }
                         });
                     }.bind(this))
                 }
             }
         }
+    }
+
+    cubeFalling() {
+        let fallingCubes = 0;
+        let moves = this.newGame.arrangeBoard();
+        moves.forEach(function(movement) {
+            fallingCubes++;
+            this.tweens.add({
+                targets: this.newGame.getCustomData(movement.row, movement.column),
+                y: this.newGame.getCustomData(movement.row, movement.column).y + gameSettings.cubeProportions_y * movement.deltaRow,
+                duration: gameSettings.fallSpeed * movement.deltaRow,
+                callbackScope: this,
+                onComplete: function() {
+                    fallingCubes--;
+                    if (fallingCubes === 0) {
+                        this.canBreak = true
+                    }
+                }
+            })
+        }.bind(this));
     }
 }
