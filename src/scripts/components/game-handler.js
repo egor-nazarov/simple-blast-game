@@ -4,6 +4,8 @@ import gameSettings from "../config/game-config";
 export class GameScene extends Phaser.Scene {
     constructor() {
         super("Game");
+        this.score = 0;
+        this.scoreText = "";
     }
 
     preload() {
@@ -58,6 +60,7 @@ export class GameScene extends Phaser.Scene {
             frameWidth: 62.2,
             frameHeight: 71
         });
+        this.scoreText = this.add.text(width / 5 * 4 - 80, height / 2 + 30, '0', { fontSize: '55px', fill: '#fff', align: "center" });
     }
 
     create() {
@@ -89,7 +92,7 @@ export class GameScene extends Phaser.Scene {
             let row = Math.floor((pointer.y - gameSettings.boardOffset.y) / gameSettings.cubeProportions_y);
             let col = Math.floor((pointer.x - gameSettings.boardOffset.x) / gameSettings.cubeProportions_x);
             if (this.newGame.validPick(row, col)) {
-                if (this.newGame.countConnectedItems(row, col) > 2) {
+                if (this.newGame.countConnectedItems(row, col) > 1) {
                     this.canBreak = false;
                     let removeCube = this.newGame.listConnectedItems(row, col);
                     let destroyed = 0;
@@ -119,6 +122,7 @@ export class GameScene extends Phaser.Scene {
         let fallingCubes = 0;
         let moves = this.newGame.arrangeBoard();
         let refillMoves = this.newGame.refillBoard();
+        this.changeScore(this.newGame.floodFillArray.length,);
         moves.forEach(function(movement) {
             fallingCubes++;
             this.tweens.add({
@@ -155,5 +159,17 @@ export class GameScene extends Phaser.Scene {
                 }
             });
         }.bind(this))
+    }
+
+    // Подсчет очков
+    changeScore(cube) {
+        if (cube < 3) {
+            this.score += 5 * cube;
+        } else if (cube >= 3 && cube < 5) {
+            this.score += 10 * cube;
+        } else if (cube >= 5) {
+            this.score += 20 * cube;
+        }
+        this.scoreText.setText(this.score);
     }
 }
