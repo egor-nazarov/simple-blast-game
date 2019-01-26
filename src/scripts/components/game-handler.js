@@ -118,6 +118,7 @@ export class GameScene extends Phaser.Scene {
     cubeFalling() {
         let fallingCubes = 0;
         let moves = this.newGame.arrangeBoard();
+        let refillMoves = this.newGame.refillBoard();
         moves.forEach(function(movement) {
             fallingCubes++;
             this.tweens.add({
@@ -133,5 +134,26 @@ export class GameScene extends Phaser.Scene {
                 }
             })
         }.bind(this));
+        refillMoves.forEach(function(movement) {
+            fallingCubes++;
+            let sprite = this.poolArray.pop();
+            sprite.alpha = 1;
+            sprite.y = gameSettings.boardOffset.y + gameSettings.cubeProportions_y * (movement.row - movement.deltaRow + 1) - gameSettings.cubeProportions_y / 2;
+            sprite.x = gameSettings.boardOffset.x + gameSettings.cubeProportions_x * movement.column + gameSettings.cubeProportions_x / 2;
+            sprite.setFrame(this.newGame.getValue(movement.row, movement.column));
+            this.newGame.setCustomData(movement.row, movement.column, sprite);
+            this.tweens.add({
+                targets: sprite,
+                y: gameSettings.boardOffset.y + gameSettings.cubeProportions_y * movement.row + gameSettings.cubeProportions_y / 2,
+                duration: gameSettings.fallSpeed * movement.deltaRow,
+                callbackScope: this,
+                onComplete: function() {
+                    fallingCubes--;
+                    if (fallingCubes === 0) {
+                        this.canBreak = true
+                    }
+                }
+            });
+        }.bind(this))
     }
 }

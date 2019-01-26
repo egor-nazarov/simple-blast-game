@@ -151,6 +151,27 @@ class GameAlgorithm {
         this.newGameArray[row][column] = Object.assign(this.newGameArray[row2][column2]);
         this.newGameArray[row2][column2] = Object.assign(tempObject);
     }
+
+    // Заполнить доску недостающими кубиками
+    refillBoard() {
+        let result = [];
+        for (let i = 0; i < this.getColumns(); i++) {
+            if (this.isEmpty(0, i)) {
+                let emptySpaces = this.emptySpacesBelow(0, i) + 1;
+                for (let j = 0; j < emptySpaces; j++) {
+                    let randomValue = Math.floor(Math.random() * this.items);
+                    result.push({
+                        row: j,
+                        column: i,
+                        deltaRow: emptySpaces
+                    });
+                    this.newGameArray[j][i].value = randomValue;
+                    this.newGameArray[j][i].isEmpty = false;
+                }
+            }
+        }
+        return result;
+    }
 }
 
 export default GameAlgorithm;
